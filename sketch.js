@@ -20,8 +20,16 @@ function draw() {
   let imgW = windowWidth * 0.6;
   let imgH = windowHeight * 0.6;
   
-  // 將攝影機影像畫在視窗正中間
+  // 使用 push 和 pop 來確保翻轉效果只套用在攝影機畫面上
+  push();
+  // 將畫布的座標原點移到視窗的最右邊
+  translate(windowWidth, 0);
+  // 將 X 軸以 -1 的比例縮放，達成水平鏡像翻轉
+  scale(-1, 1);
+  
+  // 將攝影機影像畫在視窗正中間 (在翻轉後的座標系中，置中的座標點依然相同)
   image(capture, windowWidth / 2, windowHeight / 2, imgW, imgH);
+  pop();
 }
 
 // (選擇性) 加上這個函式可以確保視窗縮放時，畫布大小也會跟著動態調整
